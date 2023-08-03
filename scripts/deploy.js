@@ -1,28 +1,15 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// You can also run a script with `npx hardhat run <script>`. If you do that, Hardhat
-// will compile your contracts, add the Hardhat Runtime Environment's members to the
-// global scope, and execute the script.
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  /**
+   * @dev make sure the first argument has the same name of your contract in the Hello_swtr.sol file
+   * @dev the second argument is the message we want to set in the contract during the deployment process
+   */
+  const contract = await hre.ethers.deployContract("Swisstronik", ["Hello Swisstronik!!"]);
 
-  const lockedAmount = hre.ethers.parseEther("0.001");
+  await contract.waitForDeployment();
 
-  const lock = await hre.ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  console.log(`Swisstronik contract deployed to ${contract.target}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
