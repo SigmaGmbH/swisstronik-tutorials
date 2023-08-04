@@ -16,7 +16,7 @@ Get ready to dive in, learn, and create with Swisstronik Blockchain smart contra
 
 Stay updated with the latest advancements in Swisstronik Blockchain by following our official channels.
 
-🌐 [Website]()
-📢 [Twitter]()
-💬 [Discord]()
-📖 [Documentation]()
+🌐 [Website](https://link.swisstronik.com/44e)
+📢 [Twitter](https://link.swisstronik.com/964)
+💬 [Discord](https://link.swisstronik.com/2tz)
+📖 [Documentation](https://link.swisstronik.com/u7a)
