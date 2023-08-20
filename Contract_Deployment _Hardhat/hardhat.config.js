@@ -1,11 +1,16 @@
 require("@nomicfoundation/hardhat-toolbox");
 
+const PRIVATE_KEY = "";
+// Remember to use the private key of a testing account
+// For better security practices, it's recommended to use npm dotenv for storing secret variables
+
 module.exports = {
-  solidity: "0.8.19",
+  defaultNetwork: "swisstronik",
+  solidity: "0.8.21",
   networks: {
     swisstronik: {
       url: "https://json-rpc.testnet.swisstronik.com/",
-      accounts: ["0xd5a63c3b252ef2ac23a65320e6e79e5ddd36dd477b9ee20e86e8c0b7d74e80f4"],
+      accounts: [`0x` + `${PRIVATE_KEY}`],
     },
   },
 };
