@@ -5,20 +5,23 @@ This project demonstrates a basic PERC20 contract without comprensive access-con
 ### Build
 
 To compile contracts, use following command:
-`npm run compile`
+```sh 
+npm run compile
+```
 
-### Testing
+### Testing & Deployment
 
 <b>NOTE</b>: tests are not compatible with hardhat network / ganache, so you have to start Swisstronik local node or use public testnet
 
+Replace `PRIVATE_KEY` in `hardhat.config.ts` with actual private key to interact with network. If you're using local Swisstronik network you also should replace `url` in `hardhat.config.ts`
 
+To run tests, use following command:
 
-Try running some of the following tasks:
+```sh
+npm run test
+```
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+To deploy contracts, use check `scripts/deploy.ts` script and use following command:
+```sh
+npm run deploy
 ```
