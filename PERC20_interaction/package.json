@@ -8,6 +8,8 @@
     "@openzeppelin/contracts": "^4.9.3"
   },
   "scripts": {
-    "compile": "hardhat compile"
+    "compile": "hardhat compile",
+    "test": "hardhat test --network swisstronik",
+    "deploy": "hardhat run scripts/deploy.ts --network swisstronik"
   }
 }
