@@ -13,7 +13,11 @@ npm run compile
 
 <b>NOTE</b>: tests are not compatible with hardhat network / ganache, so you have to start Swisstronik local node or use public testnet
 
-Replace `PRIVATE_KEY` in `hardhat.config.ts` with actual private key to interact with network. If you're using local Swisstronik network you also should replace `url` in `hardhat.config.ts`
+Create `.env` file from example
+```sh
+cp example.env .env
+```
+Add `PRIVATE_KEY` in `.env` with actual private key to interact with network. If you're using other network than local testnet you also should replace `url` in `hardhat.config.ts`
 
 To run tests, use following command:
 

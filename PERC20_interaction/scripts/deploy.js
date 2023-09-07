@@ -1,10 +1,10 @@
-import { ethers } from "hardhat";
+const { ethers } = require("hardhat");
 
 async function main() {
-  const tx = await ethers.deployContract("PERC20Sample");
-  await tx.waitForDeployment();
+  const perc20 = await ethers.deployContract("PERC20Sample");
+  await perc20.waitForDeployment();
   
-  console.log(`PERC20Sample was deployed to ${tx.target}`)
+  console.log(`PERC20Sample was deployed to ${perc20.address}`)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

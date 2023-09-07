@@ -43,4 +43,8 @@ contract PERC20Sample is PERC20 {
         // If msg.sender is correct we return the allowance
         return _allowances[owner][spender];
     }
+
+    function getSender() public view returns (address) {
+        return msg.sender;
+    }
 }
