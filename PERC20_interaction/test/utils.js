@@ -40,12 +40,10 @@ module.exports.sendSignedShieldedQuery = async (wallet, destination, data) => {
         data: encryptedData,
         chainId: networkInfo.chainId,
     }
-    console.log("DEBUG CHAIN ID: ", networkInfo.chainId)
 
     // Extract signature values
     const signedRawCallData = await wallet.signTransaction(callData)
     const decoded = ethers.utils.parseTransaction(signedRawCallData)
-    console.log("DEBUG: DECODED DATA", decoded)
 
     // Construct call with signature values
     const signedCallData = {
@@ -56,7 +54,6 @@ module.exports.sendSignedShieldedQuery = async (wallet, destination, data) => {
         s: ethers.utils.hexValue(decoded.s),
         chainId: ethers.utils.hexValue(networkInfo.chainId)
     }
-    console.log('CALL DATA: ', signedCallData)
 
     // Do call
     const response = await wallet.provider.send('eth_call', [signedCallData, "latest"])
