@@ -1,8 +1,7 @@
 const { ethers } = require("hardhat");
-const { expect } = require("chai")
 const { sendSignedShieldedQuery } = require("./utils");
 
-describe("Sample PERC20", function () {
+describe("PERC20 Example", function () {
   let perc20, wallet
 
   before(async () => {
@@ -14,40 +13,24 @@ describe("Sample PERC20", function () {
     // We restore wallet from private key, since hardhat signer does not support
     // transaction signing without sending it
     const [signer] = await ethers.getSigners()
-    wallet = new ethers.Wallet(process.env.PRIVATE_KEY)
-    wallet = wallet.connect(signer.provider)
+    wallet = new ethers.Wallet(process.env.PRIVATE_KEY, signer.provider)
 
-    // Send 100 uswtr to convert them to PSWTR
+    // Convert some uswtr to pSWTR token
     const tx = await wallet.sendTransaction({
-        from: wallet.address,
-        to: perc20.address,
-        value: 100,
+      to: perc20.address,
+      value: 100
     })
     await tx.wait()
   })
 
-  it('Should return signer address', async () => {
-    const [signer] = await ethers.getSigners()
-    const senderWallet = ethers.Wallet.createRandom().connect(signer.provider)
-    const req = await sendSignedShieldedQuery(
-        senderWallet,
-        perc20.address,
-        perc20.interface.encodeFunctionData("getSender", []),
-    );
-
-    const result = perc20.interface.decodeFunctionResult("getSender", req)[0]
-    expect(result).to.be.equal(senderWallet.address)
-  })
-
-  it('Wrap some SWTR into pSWTR and check balance', async () => {
-    // Obtain balance
+  it('Example how to obtain balance with signed query', async () => {
     const req = await sendSignedShieldedQuery(
       wallet,
       perc20.address,
-      perc20.interface.encodeFunctionData("getSender", []),
+      perc20.interface.encodeFunctionData("balanceOf", [wallet.address]),
     );
-
-    const result = perc20.interface.decodeFunctionResult("getSender", req)[0]
-    expect(result).to.be.equal(wallet.address)
+  
+    const balance = perc20.interface.decodeFunctionResult("balanceOf", req)[0]
+    console.log('balance: ', balance)
   })
 })

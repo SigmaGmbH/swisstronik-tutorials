@@ -1,4 +1,3 @@
-const { ethers } = require('ethers')
 const { encryptDataField, decryptNodeResponse } = require('@swisstronik/swisstronik.js')
 
 module.exports.sendShieldedQuery = async (provider, destination, data, value) => {
@@ -33,9 +32,11 @@ module.exports.sendSignedShieldedQuery = async (wallet, destination, data) => {
 
     // Get chain id for signature
     const networkInfo = await wallet.provider.getNetwork()
+    const nonce = await wallet.getTransactionCount()
 
     // We treat signed call as a transaction, but it will be sent using eth_call
     const callData = {
+        nonce: ethers.utils.hexValue(nonce), // We use nonce to create some kind of reuse-protection
         to: destination,
         data: encryptedData,
         chainId: networkInfo.chainId,
@@ -47,6 +48,7 @@ module.exports.sendSignedShieldedQuery = async (wallet, destination, data) => {
 
     // Construct call with signature values
     const signedCallData = {
+        nonce: ethers.utils.hexValue(nonce), // We use nonce to create some kind of reuse-protection
         to: decoded.to,
         data: decoded.data,
         v: ethers.utils.hexValue(decoded.v),
