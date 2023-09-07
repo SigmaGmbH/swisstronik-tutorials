@@ -1,4 +1,4 @@
-const { ethers } = require("hardhat");
+const hre = require("hardhat")
 const { sendSignedShieldedQuery } = require("./utils");
 
 describe("PERC20 Example", function () {
@@ -6,14 +6,16 @@ describe("PERC20 Example", function () {
 
   before(async () => {
     // Deploy PERC20Sample.sol
-    const PERC20 = await ethers.getContractFactory("PERC20Sample")
+    const PERC20 = await hre.ethers.getContractFactory("PERC20Sample")
     perc20 = await PERC20.deploy()
     await perc20.deployed()
 
     // We restore wallet from private key, since hardhat signer does not support
     // transaction signing without sending it
-    const [signer] = await ethers.getSigners()
-    wallet = new ethers.Wallet(process.env.PRIVATE_KEY, signer.provider)
+    wallet = new hre.ethers.Wallet(
+      process.env.PRIVATE_KEY, 
+      new hre.ethers.providers.JsonRpcProvider(hre.network.config.url)
+    )
 
     // Convert some uswtr to pSWTR token
     const tx = await wallet.sendTransaction({
