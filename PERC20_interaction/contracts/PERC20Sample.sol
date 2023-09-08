@@ -5,10 +5,6 @@ import "./PERC20.sol";
 
 /**
  * @dev Sample implementation of the {PERC20} contract.
- *
- * This implementation is agnostic to the way tokens are created. This means
- * that a supply mechanism has to be added in a derived contract using {_mint}.
- * For a generic mechanism see {ERC20PresetMinterPauser}.
  */
 contract PERC20Sample is PERC20 {
     constructor() PERC20("Sample PERC20", "pSWTR") {}
