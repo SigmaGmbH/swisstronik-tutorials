@@ -1,6 +1,6 @@
 // Import Hardhat and SwisstronikJS functions
 const hre = require("hardhat");
-const { encryptDataField, decryptNodeResponse } = require("@swisstronik/swisstronik.js");
+const { encryptDataField, decryptNodeResponse } = require("@swisstronik/utils");
 
 /**
  * Send a shielded transaction to the Swisstronik blockchain.
@@ -42,7 +42,12 @@ async function main() {
   // Send a shielded transaction to set a message in the contract
   const functionName = "setMessage";
   const messageToSet = "Hello Swisstronik!!";
-  const setMessageTx = await sendShieldedTransaction(signer, contractAddress, contract.interface.encodeFunctionData(functionName, [messageToSet]), 0);
+  const setMessageTx = await sendShieldedTransaction(
+    signer,
+    contractAddress,
+    contract.interface.encodeFunctionData(functionName, [messageToSet]),
+    0
+  );
   await setMessageTx.wait();
 
   //It should return a TransactionResponse object

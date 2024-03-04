@@ -1,4 +1,4 @@
-const { encryptDataField, decryptNodeResponse } = require('@swisstronik/swisstronik.js')
+const { encryptDataField, decryptNodeResponse } = require("@swisstronik/utils");
 
 module.exports.sendShieldedQuery = async (provider, destination, data, value) => {
     // Encrypt call data

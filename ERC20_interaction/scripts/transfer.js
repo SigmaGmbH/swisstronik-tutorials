@@ -1,6 +1,6 @@
 // Import necessary modules from Hardhat and SwisstronikJS
 const hre = require("hardhat");
-const { encryptDataField, decryptNodeResponse } = require("@swisstronik/swisstronik.js");
+const { encryptDataField, decryptNodeResponse } = require("@swisstronik/utils");
 
 // Function to send a shielded transaction using the provided signer, destination, data, and value
 const sendShieldedTransaction = async (signer, destination, data, value) => {
