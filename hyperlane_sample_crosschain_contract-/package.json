@@ -1,0 +1,22 @@
+{
+  "name": "sample-cross-chain-contract",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.20.1"
+  },
+  "dependencies": {
+    "@hyperlane-xyz/core": "^3.7.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@swisstronik/utils": "^1.2.1",
+    "dotenv": "^16.4.4"
+  },
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "increment:mumbai": "hardhat run scripts/mumbaiIncrement.ts",
+    "increment:swisstronik": "hardhat run scripts/increment.ts",
+    "counter:mumbai": "hardhat run scripts/counter.ts",
+    "counter:swisstronik": "hardhat run scripts/counterSwisstronik.ts",
+    "hardhat": "hardhat"
+  }
+}
