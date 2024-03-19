@@ -1,5 +1,4 @@
 import { AbiInput, Web3 } from "web3";
-// import { SwisstronikPlugin } from "web3-plugin-swisstronik";
 import { abi } from "./TestContract";
 import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
 import { encryptDataField, decryptNodeResponse } from "@swisstronik/utils";
