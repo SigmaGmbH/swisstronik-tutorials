@@ -1,6 +1,6 @@
 // Import Hardhat and SwisstronikJS functions
 const hre = require("hardhat");
-const { encryptDataField, decryptNodeResponse } = require("@swisstronik/swisstronik.js");
+const { encryptDataField, decryptNodeResponse } = require("@swisstronik/utils");
 
 /**
  * Send a shielded query/call to the Swisstronik blockchain.
@@ -16,7 +16,10 @@ const sendShieldedQuery = async (provider, destination, data) => {
   const rpclink = hre.network.config.url;
 
   // Encrypt the call data using the SwisstronikJS function
-  const [encryptedData, usedEncryptedKey] = await encryptDataField(rpclink, data);
+  const [encryptedData, usedEncryptedKey] = await encryptDataField(
+    rpclink,
+    data
+  );
 
   // Execute the call/query using the provider
   const response = await provider.call({
@@ -41,10 +44,17 @@ async function main() {
 
   // Send a shielded query to retrieve data from the contract
   const functionName = "getMessage";
-  const responseMessage = await sendShieldedQuery(signer.provider, contractAddress, contract.interface.encodeFunctionData(functionName));
+  const responseMessage = await sendShieldedQuery(
+    signer.provider,
+    contractAddress,
+    contract.interface.encodeFunctionData(functionName)
+  );
 
   // Decode the Uint8Array response into a readable string
-  console.log("Decoded response:", contract.interface.decodeFunctionResult(functionName, responseMessage)[0]);
+  console.log(
+    "Decoded response:",
+    contract.interface.decodeFunctionResult(functionName, responseMessage)[0]
+  );
 }
 
 // Using async/await pattern to handle errors properly

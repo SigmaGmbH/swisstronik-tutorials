@@ -6,6 +6,6 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.3",
-    "@swisstronik/swisstronik.js": "^1.0.0"
+    "@swisstronik/utils": "^1.2.1"
   }
 }

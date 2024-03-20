@@ -4,6 +4,6 @@
     "hardhat": "^2.17.1"
   },
   "dependencies": {
-    "@swisstronik/swisstronik.js": "^1.0.0"
+    "@swisstronik/utils": "^1.2.1"
   }
 }
