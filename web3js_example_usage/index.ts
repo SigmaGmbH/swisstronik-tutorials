@@ -48,19 +48,13 @@ function decodeCall(methodName: string, bytes: string) {
 }
 
 async function balanceOfWithPlugin() {
-  const contract = getContract();
-  const data = contract.methods.balanceOf(ADDRESS).encodeABI();
-  const responseMessage = await web3.swisstronik.call({
-    to: SWTR_CONTRACT,
-    data,
-  });
-
-  const balanceOf = decodeCall("balanceOf", responseMessage)[0];
+  const contract = new web3.swisstronik.Contract(abi, SWTR_CONTRACT);
+  const balanceOf = await contract.methods.balanceOf(ADDRESS).call();
   console.log("balanceOfWithPlugin:", balanceOf);
 }
 
 async function balanceOfWithoutPlugin() {
-  const contract = getContract();
+  const contract = new web3.eth.Contract(abi, SWTR_CONTRACT);
   const data = contract.methods.balanceOf(ADDRESS).encodeABI();
   const responseMessage = await sendShieldedQuery(SWTR_CONTRACT, data);
 
