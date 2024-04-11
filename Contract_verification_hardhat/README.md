@@ -17,4 +17,4 @@ You can verify the contract programatically
 ## verification using the Hardhat CLI
 
 You can also verify the contract by the CLI
-- Run `npx hardhat verify [CONTRACT_ADDRESS] [...constructorArgsParams] --network swisstronik`. Example: `npx hardhat verify 0x0f2846b17D72c1D7679c14e8A2e5c4920b93F2be 1893456010 --network swisstronik`. Check npx hardhat verify --help for more info
+- Run `npx hardhat verify [CONTRACT_ADDRESS] [...constructorArgsParams] --network swisstronik`. Example: `npx hardhat verify 0x0f2846b17D72c1D7679c14e8A2e5c4920b93F2be 1893456010 --network swisstronik`. Check `npx hardhat verify --help` for more info
