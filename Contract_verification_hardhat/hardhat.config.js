@@ -1,7 +1,7 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
-const PRIVATE_KEY =
-  "4013e13864b8634a28602265ff6a6ebd66ab348edaf6b128a9b357f7cde35e50";
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 // Remember to use the private key of a testing account
 // For better security practices, it's recommended to use npm i dotenv for storing secret variables
 
