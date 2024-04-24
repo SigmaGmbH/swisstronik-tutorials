@@ -1,5 +1,6 @@
 import {ethers} from "hardhat";
-import {encryptDataField, decryptNodeResponse} from "@swisstronik/utils";
+import {sendShieldedQuery} from "./utils";
+
 async function main() {
   // Construct instance of SampleCrossChainCounter in Swisstronik
   const provider = new ethers.JsonRpcProvider(process.env.SWISSTRONIK_RPC);
@@ -19,23 +20,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
-const sendShieldedQuery = async (
-  provider: any,
-  destination: any,
-  data: any
-) => {
-  const rpclink = process.env.SWISSTRONIK_RPC;
-
-  // Encrypt the call data using the SwisstronikJS function encryptDataField()
-  const [encryptedData, usedEncryptedKey] = await encryptDataField(rpclink!, data);
-
-  // Execute the call/query using the provider
-  const response = await provider.call({
-    to: destination,
-    data: encryptedData,
-  });
-
-  // Decrypt the call result using SwisstronikJS function decryptNodeResponse()
-  return await decryptNodeResponse(rpclink!, response, usedEncryptedKey);
-};

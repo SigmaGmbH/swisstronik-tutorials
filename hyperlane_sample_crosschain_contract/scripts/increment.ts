@@ -1,5 +1,6 @@
 import {ethers} from "hardhat";
 import {encryptDataField, decryptNodeResponse} from "@swisstronik/utils";
+import {sendShieldedTransaction} from "./utils"
 
 async function main() {
   // Construct instance of SampleCrossChainCounter in Swisstronik
@@ -30,26 +31,6 @@ async function main() {
 
   console.log(`Counter at Swisstronik was updated ${counterBefore} -> ${counterAfter}`);
 }
-
-const sendShieldedTransaction = async (
-  signer: any,
-  destination: string,
-  data: string,
-  value: number
-) => {
-  const rpclink = process.env.SWISSTRONIK_RPC;
-
-  // Encrypt transaction data
-  const [encryptedData] = await encryptDataField(rpclink!, data);
-
-  // Construct and sign transaction with encrypted data
-  return await signer.sendTransaction({
-    from: signer.address,
-    to: destination,
-    data: encryptedData,
-    value,
-  });
-};
 
 const sendShieldedQuery = async (
   provider: any,
