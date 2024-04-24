@@ -5,6 +5,8 @@ This project demonstrates basic Cross-Chain contract which is using Hyperlane Ma
 
 The contract itself can be found here: [SampleCrossChainCounter.sol](/contracts/SampleCrossChainCounter.sol)
 
+# TODO: ADD USEFULL LINKS
+
 ## Build
 Install dependencies:
 ```sh
