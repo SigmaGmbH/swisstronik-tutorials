@@ -5,10 +5,15 @@ This project demonstrates basic Cross-Chain contract which is using Hyperlane Ma
 
 The contract itself can be found here: [SampleCrossChainCounter.sol](/hyperlane_sample_crosschain_contract/contracts/SampleCrossChainCounter.sol)
 
-## Usefull links
+## Useful links
 
 - Swisstronik Faucet: https://faucet.testnet.swisstronik.com
 - BSC Testnet Faucet: https://www.bnbchain.org/en/testnet-faucet
+
+## Socials
+
+- Discord: https://link.swisstronik.com/a46c36
+- Twitter: https://twitter.com/swisstronik
 
 ## Build
 Install dependencies:
