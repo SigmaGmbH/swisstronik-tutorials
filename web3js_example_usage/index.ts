@@ -1,18 +1,14 @@
 import { AbiInput, Web3 } from "web3";
 import { abi } from "./TestContract";
-import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
 import { encryptDataField, decryptNodeResponse } from "@swisstronik/utils";
+import { SwisstronikPlugin } from "@swisstronik/web3-plugin-swisstronik";
+
 
 const NODE_HTTP_URL = "https://json-rpc.testnet.swisstronik.com";
 const SWTR_CONTRACT = "0x8292EAebc2764183e0De8c9088129Ee514d4c292";
 const ADDRESS = "0xc288ca632d39c1dC003B9F835D5CFf3c871Ac00F";
 
 const web3 = new Web3(NODE_HTTP_URL);
-web3.registerPlugin(new SwisstronikPlugin());
-
-function getContract() {
-  return new web3.eth.Contract(abi, SWTR_CONTRACT);
-}
 
 async function sendShieldedQuery(destination: string, data: string) {
   let encryptedData: string;
@@ -47,12 +43,6 @@ function decodeCall(methodName: string, bytes: string) {
   return web3.eth.abi.decodeParameters(input, bytes);
 }
 
-async function balanceOfWithPlugin() {
-  const contract = new web3.swisstronik.Contract(abi, SWTR_CONTRACT);
-  const balanceOf = await contract.methods.balanceOf(ADDRESS).call();
-  console.log("balanceOfWithPlugin:", balanceOf);
-}
-
 async function balanceOfWithoutPlugin() {
   const contract = new web3.eth.Contract(abi, SWTR_CONTRACT);
   const data = contract.methods.balanceOf(ADDRESS).encodeABI();
@@ -62,10 +52,18 @@ async function balanceOfWithoutPlugin() {
   console.log("balanceOfWithoutPlugin:", balanceOf);
 }
 
+async function balanceOfWithPlugin() {
+  web3.registerPlugin(new SwisstronikPlugin());
+
+  const contract = new web3.eth.Contract(abi, SWTR_CONTRACT);
+  const balanceOf = await contract.methods.balanceOf(ADDRESS).call();
+  console.log("balanceOfWithPlugin:", balanceOf);
+}
+
 async function main() {
   console.log("Doing swisstronik call...");
-  await balanceOfWithPlugin();
   await balanceOfWithoutPlugin();
+  await balanceOfWithPlugin();
 }
 
 main();

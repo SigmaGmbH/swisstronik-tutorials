@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@swisstronik/utils": "^1.2.1",
-    "@swisstronik/web3-plugin-swisstronik": "^1.1.0",
-    "web3": "^4.6.0"
+    "@swisstronik/web3-plugin-swisstronik": "file:../../web3-plugin-swisstronik/",
+    "web3": "^4.8.1-dev.5fd9dbb.0"
   },
   "scripts": {
     "start": "ts-node index.ts"
