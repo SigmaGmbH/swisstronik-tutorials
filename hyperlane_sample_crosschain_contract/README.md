@@ -3,7 +3,7 @@
 ## Overview
 This project demonstrates basic Cross-Chain contract which is using Hyperlane Mailbox to broadcast messages across chains.
 
-The contract itself can be found here: [SampleCrossChainCounter.sol](/contracts/SampleCrossChainCounter.sol)
+The contract itself can be found here: [SampleCrossChainCounter.sol](/hyperlane_sample_crosschain_contract/contracts/SampleCrossChainCounter.sol)
 
 ## Usefull links
 
