@@ -2,11 +2,11 @@ import {ethers} from "hardhat";
 
 async function main() {
   // Construct instance of SampleCrossChainCounter in Swisstronik
-  const provider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC);
+  const provider = new ethers.JsonRpcProvider(process.env.BSC_TESTNET_RPC);
   const wallet = new ethers.Wallet(process.env.DEPLOYER_KEY!);
   const signer = wallet.connect(provider);
 
-  const contract = await ethers.getContractAt("SampleCrossChainCounter", process.env.MUMBAI_CONTRACT_ADDRESS!, signer);
+  const contract = await ethers.getContractAt("SampleCrossChainCounter", process.env.BSC_TESTNET_CONTRACT_ADDRESS!, signer);
 
   // Obtain value of counter
   const counterBefore = await contract.counter();
@@ -18,7 +18,7 @@ async function main() {
   // Obtain updated counter value
   const counterAfter = await contract.counter();
 
-  console.log(`Counter at Mumbai was updated ${counterBefore} -> ${counterAfter}`);
+  console.log(`Counter at BSC Testnet was updated ${counterBefore} -> ${counterAfter}`);
 }
 
 main().catch((error) => {

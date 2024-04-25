@@ -80,9 +80,6 @@ contract SampleCrossChainCounter is Ownable, IMessageRecipient, ISpecifiesInterc
     // This function increments `counter` in original chain and calls `dispatch` function at Mailbox contract
     // to sync `counter` value with contract, deployed in other chain.
     function incrementCounter() public payable {
-        // At least 1 wei should be sent within transaction to cover transaction fees
-        require(msg.value > 0, "At least 1 wei should be sent within transaction to cover transaction fees");
-
         // Increment counter
         counter++;
         
