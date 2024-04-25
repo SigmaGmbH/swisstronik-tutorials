@@ -1,4 +1,4 @@
-# Demo Cross-Chain contract Swisstronik <-> Mumbai
+# Demo Cross-Chain contract Swisstronik <-> Bsc Testnet
 
 ## Overview
 This project demonstrates basic Cross-Chain contract which is using Hyperlane Mailbox to broadcast messages across chains.
@@ -18,7 +18,7 @@ npm run compile
 ```
 
 ## Deploy
-We will deploy 2 instances of `SampleCrossChainCounter`, one in Swisstronik and one in Polygon Mumbai.
+We will deploy 2 instances of `SampleCrossChainCounter`, one in Swisstronik and one in BSC Testnet.
 
 Before deployment, create `.env` file by running the following command:
 ```sh
@@ -41,14 +41,14 @@ We've prepared multiple scripts for interaction with deployed contracts.
 You can use these scripts with already deployed contracts.
 However,if you wish you can deploy your own and update contract addresses in .env file to addresses of deployed contracts.
 
-- `MUMBAI_CONTRACT_ADDRESS` should be filled with address of `SampleCrossChainCounter` deployed in Polygon Mumbai
+- `BSC_TESTNET_CONTRACT_ADDRESS` should be filled with address of `SampleCrossChainCounter` deployed in BSC Testnet
 - `SWISSTRONIK_CONTRACT_ADDRESS` should be filled with address of `SampleCrossChainCounter` deployed in Swisstronik
 
-### Increment counter in Polygon Mumbai
+### Increment counter in BSC Testnet
 
-We will start from incrementing counter in Polygon Mumbai network. You can use the command below:
+We will start from incrementing counter in BSC Testnet network. You can use the command below:
 ```sh
-npm run increment:mumbai
+npm run increment:bsctestnet
 ```
 The command above will output you previous and new value of counter. During the counter update, the contract calls `dispatch` function at Hyperlane Mailbox to increment value at Swisstronik `SampleCrossChainCounter` instance also.
 
@@ -59,13 +59,13 @@ npm run counter:swisstronik
 
 ### Increment counter in Swisstronik Network
 
-To increment counter in Swisstronik and sync its value with Mumbai instance, you can use the following command:
+To increment counter in Swisstronik and sync its value with BSC Testnet instance, you can use the following command:
 ```sh
 npm run increment:swisstronik
 ```
-The command above works the same as in Polygon Mumbai, but now Swisstronik instance calls Hyperlane Mailbox, deployed in Swisstronik, to initiate cross-chain transaction.
+The command above works the same as in BSC Testnet, but now Swisstronik instance calls Hyperlane Mailbox, deployed in Swisstronik, to initiate cross-chain transaction.
 
-You can check if cross-chain transaction from Swisstronik to Mumbai was succeed by running the following command:
+You can check if cross-chain transaction from Swisstronik to BSC Testnet was succeed by running the following command:
 ```sh
-npm run counter:mumbai
+npm run counter:bsctestnet
 ```

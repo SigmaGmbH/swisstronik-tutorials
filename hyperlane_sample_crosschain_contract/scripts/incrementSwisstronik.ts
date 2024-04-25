@@ -21,7 +21,7 @@ async function main() {
     signer,
     process.env.SWISSTRONIK_CONTRACT_ADDRESS!,
     encodedIncrementData,
-    1
+    0
   );
   await tx.wait();
 

@@ -1,17 +1,16 @@
 import { ethers } from "hardhat";
-import { encryptDataField } from "@swisstronik/utils";
+import { sendShieldedTransaction } from "./utils";
 
 const SWISSTRONIK_CHAIN_ID = 1291;
-const MUMBAI_CHAIN_ID = 80001;
+const BSC_TESTNET_CHAIN_ID = 97;
 
-const SWISSTRONIK_MAILBOX = "0xF12c1fA2ca4a0EB6051591B57250Cf44bFd242Bf";
-// We're using empty addresses for Swisstronik since Mumbai can be understood by default hook
-const SWISSTRONIK_MERKLE_TREE_HOOK = ethers.ZeroAddress;
-const SWISSTRONIK_ISM = "0x6289Ab10eE0Ff1bF222e740A7AE3FF79A9e27110";
+const SWISSTRONIK_MAILBOX = "0x62FDf16882959440FB6E30f262266d7dC74AE09d";
+const SWISSTRONIK_MERKLE_TREE_HOOK = "0xae3915bAd34189E8bC5356C4a8E8E466295f54d2";
+const SWISSTRONIK_ISM = "0xb28A8333AD28712D48Af2D4AbBA0AFe5f176e125";
 
-const MUMBAI_MERKLE_TREE_HOOK = "0x9AF85731EDd41E2E50F81Ef8a0A69D2fB836EDf9";
-const MUMBAI_MAILBOX = "0x2d1889fe5B092CD988972261434F7E5f26041115";
-const MUMBAI_ISM = "0xb27a1acE410bc221039225276255Aff8ef8d2b1C";
+const BSC_TESTNET_MERKLE_TREE_HOOK = "0xc6cbF39A747f5E28d1bDc8D9dfDAb2960Abd5A8f";
+const BSC_TESTNET_MAILBOX = "0xF9F6F5646F478d5ab4e20B0F910C92F1CCC9Cc6D";
+const BSC_TESTNET_ISM = "0xc35376DD9b009c2aB7E62365759897F0365BDa37";
 
 async function main() {
   if (!process.env.DEPLOYER_KEY) {
@@ -21,9 +20,9 @@ async function main() {
 
   console.log('Preparing signers for both networks');
   const wallet = new ethers.Wallet(process.env.DEPLOYER_KEY);
-  const mumbaiProvider = new ethers.JsonRpcProvider(process.env.MUMBAI_RPC);
+  const bscTestnetProvider = new ethers.JsonRpcProvider(process.env.BSC_TESTNET_RPC);
   const swisstronikProvider = new ethers.JsonRpcProvider(process.env.SWISSTRONIK_RPC);
-  const mumbaiSigner = wallet.connect(mumbaiProvider);
+  const bscTestnetSigner = wallet.connect(bscTestnetProvider);
   const swisstronikSigner = wallet.connect(swisstronikProvider);
 
   console.log('Deploying SampleCrossChainCounter to Swisstronik');
@@ -32,33 +31,33 @@ async function main() {
     [
       SWISSTRONIK_MAILBOX,
       SWISSTRONIK_MERKLE_TREE_HOOK,
-      MUMBAI_CHAIN_ID, // destination chain id,
+      BSC_TESTNET_CHAIN_ID, // destination chain id,
       SWISSTRONIK_ISM,
     ],
     swisstronikSigner,
   );
   await swtrContract.waitForDeployment();
 
-  console.log('Deploying SampleCrossChainCounter to Polygon Mumbai');
-  const mumbaiContract = await ethers.deployContract(
+  console.log('Deploying SampleCrossChainCounter to BSC Testnet');
+  const bscTestnetContract = await ethers.deployContract(
     "SampleCrossChainCounter",
     [
-      MUMBAI_MAILBOX,
-      MUMBAI_MERKLE_TREE_HOOK,
+      BSC_TESTNET_MAILBOX,
+      BSC_TESTNET_MERKLE_TREE_HOOK,
       SWISSTRONIK_CHAIN_ID, // destination chain id
-      MUMBAI_ISM,
+      BSC_TESTNET_ISM,
     ],
-    mumbaiSigner,
+    bscTestnetSigner,
   );
-  await mumbaiContract.waitForDeployment();
+  await bscTestnetContract.waitForDeployment();
 
   console.log('Configure recipient address in Swisstronik');
   const swisstronikContractAddress = await swtrContract.getAddress();
-  const mumbaiContractAddress = await mumbaiContract.getAddress();
+  const bscTestnetContractAddress = await bscTestnetContract.getAddress();
 
   const encodedSwtrTxData = swtrContract.interface.encodeFunctionData(
     "setCounterContractInOtherChain",
-    [mumbaiContractAddress]
+    [bscTestnetContractAddress]
   );
 
   await sendShieldedTransaction(
@@ -68,34 +67,13 @@ async function main() {
     0
   );
 
-  console.log('Configure recipient address in Polygon Mumbai');
-  await mumbaiContract.setCounterContractInOtherChain(swisstronikContractAddress);
+  console.log('Configure recipient address in BSC Testnet');
+  await bscTestnetContract.setCounterContractInOtherChain(swisstronikContractAddress);
 
   console.log('Contracts were deployed');
   console.log('Swisstronik: ', swisstronikContractAddress);
-  console.log('Mumbai: ', mumbaiContractAddress);
+  console.log('BSC Testnet: ', bscTestnetContractAddress);
 }
-
-const sendShieldedTransaction = async (
-  signer: any,
-  destination: string,
-  data: string,
-  value: number
-) => {
-
-  const rpclink = process.env.SWISSTRONIK_RPC;
-
-  // Encrypt transaction data
-  const [encryptedData] = await encryptDataField(rpclink!, data);
-
-  // Construct and sign transaction with encrypted data
-  return await signer.sendTransaction({
-    from: signer.address,
-    to: destination,
-    data: encryptedData,
-    value,
-  });
-};
 
 main().catch((error) => {
   console.error(error);
