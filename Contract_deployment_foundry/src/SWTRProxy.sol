@@ -9,7 +9,7 @@ contract SWTRProxy is TransparentUpgradeableProxy {
     ) TransparentUpgradeableProxy(_logic, msg.sender, "") {}
 
     // We call upgradeToAndCall to this address
-    function proxyAdmin() internal virtual returns (address) {
+    function proxyAdmin() external virtual returns (address) {
         return _proxyAdmin();
     }
 }
