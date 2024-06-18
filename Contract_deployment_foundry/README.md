@@ -1,5 +1,9 @@
 # SWTRPRoxy with Foundry
 
+## Install
+
+`forge soldeer update`
+
 ## Build
 
 `forge build`
