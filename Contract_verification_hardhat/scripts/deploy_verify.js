@@ -23,7 +23,7 @@ async function main() {
     });
     console.log("Contract verified to", hre.config.etherscan.customChains[0].urls.browserURL + "/address/" + contract.target);
   } catch (err) {
-    console.error("Error veryfing Contract. Reason:", err);
+    console.error("Error verifying Contract. Reason:", err);
   }
 }
 
