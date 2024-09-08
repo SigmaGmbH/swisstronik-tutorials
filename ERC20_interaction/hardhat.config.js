@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-web3-v4");
 
 const PRIVATE_KEY = "";
 // Remember to use the private key of a testing account

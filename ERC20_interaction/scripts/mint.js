@@ -1,47 +1,24 @@
 // Import necessary modules from Hardhat and SwisstronikJS
-const hre = require("hardhat");
-const { encryptDataField, decryptNodeResponse } = require("@swisstronik/utils");
-
-// Function to send a shielded transaction using the provided signer, destination, data, and value
-const sendShieldedTransaction = async (signer, destination, data, value) => {
-  // Get the RPC link from the network configuration
-  const rpcLink = hre.network.config.url;
-
-  // Encrypt transaction data
-  const [encryptedData] = await encryptDataField(rpcLink, data);
-
-  // Construct and sign transaction with encrypted data
-  return await signer.sendTransaction({
-    from: signer.address,
-    to: destination,
-    data: encryptedData,
-    value,
-  });
-};
+const { network, web3 } = require("hardhat");
+const { abi } = require("../artifacts/contracts/Token.sol/TestToken.json");
+const { SwisstronikPlugin } = require("@swisstronik/web3-plugin-swisstronik");
 
 async function main() {
+  // Register the Swisstronik plugin
+  web3.registerPlugin(new SwisstronikPlugin(network.config.url));
+
   // Address of the deployed contract
   const contractAddress = "0x7D804090e7a1FF0709d743d115bccE6757Bbe208";
 
   // Get the signer (your account)
-  const [signer] = await hre.ethers.getSigners();
+  const [from] = await web3.eth.getAccounts();
 
   // Create a contract instance
-  const contractFactory = await hre.ethers.getContractFactory("TestToken");
-  const contract = contractFactory.attach(contractAddress);
+  const contract = new web3.eth.Contract(abi, contractAddress);
 
-  // Send a shielded transaction to mint 100 tokens in the contract
-  const functionName = "mint100tokens";
-  const mint100TokensTx = await sendShieldedTransaction(
-    signer,
-    contractAddress,
-    contract.interface.encodeFunctionData(functionName),
-    0
-  );
+  // Call the mint100tokens function
+  const mint100TokensTx = await contract.methods.mint100tokens().send({ from });
 
-  await mint100TokensTx.wait();
-
-  // It should return a TransactionReceipt object
   console.log("Transaction Receipt: ", mint100TokensTx);
 }
 
