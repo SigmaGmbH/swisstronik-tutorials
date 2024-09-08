@@ -5,7 +5,11 @@
     "hardhat": "^2.17.1"
   },
   "dependencies": {
+    "@nomicfoundation/hardhat-web3-v4": "^1.0.0",
     "@openzeppelin/contracts": "^4.9.3",
-    "@swisstronik/utils": "^1.2.1"
+    "@swisstronik/utils": "^1.2.1",
+    "@swisstronik/web3-plugin-swisstronik": "^1.5.1",
+    "web3": "^4.12.1",
+    "web3-utils": "^4.3.1"
   }
 }
