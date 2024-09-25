@@ -43,9 +43,8 @@ describe("PERC20 Example", function () {
       perc20.options.address,
       perc20.methods.balanceOf(wallet.address).encodeABI()
     );
-    console.log("res: ", res);
+
     const balance = decodeCall(abi, "balanceOf", res);
-    console.log("balance: ", balance);
 
     expect(balance).to.equal(amount);
   });
