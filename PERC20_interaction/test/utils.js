@@ -5,6 +5,14 @@ const { decodeMethodReturn } = require("web3-eth-contract");
 
 const NODE_URL = hre.network.config.url;
 
+
+module.exports.hexStripZeros = (value) => {
+  value = value.substring(2);
+  let offset = 0;
+  while (offset < value.length && value[offset] === "0") { offset++; }
+  return "0x" + value.substring(offset);
+}
+
 module.exports.decodeCall = (abi, methodName, bytes) => {
   const abiFragment = abi.find((x) => x.name === methodName);
 
@@ -54,22 +62,22 @@ module.exports.sendSignedShieldedQuery = async (wallet, destination, data) => {
     from: wallet.address,
     to: destination,
     data: encryptedData,
-    chainId,
-    nonce,
-    gasPrice,
-    gasLimit: 100_000n,
+    chainId: web3.utils.toHex(chainId),
+    nonce: web3.utils.toHex(nonce),
+    gasPrice: web3.utils.toHex(gasPrice),
+    gas: web3.utils.toHex(100_000n), // It is important to use `gas`, not `gasLimit`
   };
 
-  // Sign the call
   const signedTx = await wallet.signTransaction(callData);
+  const callParams = {
+    ...callData,
+    v: this.hexStripZeros(signedTx.v),
+    r: this.hexStripZeros(signedTx.r),
+    s: this.hexStripZeros(signedTx.s),
+  }
 
   // Do the call
-  const response = await web3.eth.call({
-    ...callData,
-    v: signedTx.v,
-    r: signedTx.r,
-    s: signedTx.s,
-  });
+  const response = await web3.eth.provider.request({method: "eth_call", params: [callParams, "latest"]});
 
   // Decrypt call result
   const decryptedResponse = await decryptNodeResponse(
