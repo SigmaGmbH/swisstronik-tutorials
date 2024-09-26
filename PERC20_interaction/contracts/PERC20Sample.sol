@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+pragma solidity ^0.8.24;
 
 import "./PERC20.sol";
 
@@ -12,6 +12,10 @@ contract PERC20Sample is PERC20 {
     /// @dev Wraps SWTR to PSWTR.
     receive() external payable {
         _mint(_msgSender(), msg.value);
+    }
+
+    function mint() public {
+        _mint(msg.sender, 100*10**18);
     }
 
     /**
