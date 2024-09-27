@@ -10,7 +10,7 @@ import "./IPERC20.sol";
  *
  * _Available since v4.1._
  */
-interface IERC20Metadata is IPERC20 {
+interface IPERC20Metadata is IPERC20 {
     /**
      * @dev Returns the name of the token.
      */
