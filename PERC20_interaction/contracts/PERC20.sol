@@ -26,7 +26,7 @@ import "@openzeppelin/contracts/utils/Context.sol";
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IPERC20-approve}.
  */
-contract PERC20 is Context, IPERC20, IERC20Metadata {
+contract PERC20 is Context, IPERC20Metadata {
     mapping(address => uint256) internal _balances;
 
     mapping(address => mapping(address => uint256)) internal _allowances;
