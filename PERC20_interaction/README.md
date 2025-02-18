@@ -1,6 +1,6 @@
 # Example of PERC20 (Private ERC20)
 
-This project demonstrates a basic PERC20 contract without comprensive access-control logic. The main differences between ERC20 and PERC20 are protected `balanceOf` function and disabled `Transfer` and `Approval` events
+This project demonstrates a basic PERC20 contract without comprehensive access-control logic. The main differences between ERC20 and PERC20 are protected `balanceOf` function and disabled `Transfer` and `Approval` events
 
 ### Build
 
