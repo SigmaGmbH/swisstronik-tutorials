@@ -1,4 +1,1 @@
-@openzeppelin/contracts=dependencies/@openzeppelin-contracts-5.0.2
-forge-std=dependencies/forge-std-1.8.2/src
-@openzeppelin-contracts-5.0.2=dependencies/@openzeppelin-contracts-5.0.2
-@forge-std-1.8.2=dependencies/forge-std-1.8.2
+@openzeppelin-contracts-5.2.0/=dependencies/@openzeppelin-contracts-5.2.0/
