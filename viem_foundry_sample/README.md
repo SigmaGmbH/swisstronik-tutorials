@@ -20,7 +20,7 @@
 
 To deploy and verify it on the explorer run:
 
-`forge create src/Counter.sol:Counter --account dev --broadcast --rpc-url https://json-rpc.testnet.swisstronik.com  --verifier custom --verifier-api-key ANY --verifier-url https://explorer-evm.testnet.swisstronik.com/api --verify --evm-version shanghai`
+`forge create src/Counter.sol:Counter --account dev --broadcast --rpc-url https://json-rpc.testnet.swisstronik.com`
 
 ## Install JS deps
 
@@ -29,6 +29,12 @@ To deploy and verify it on the explorer run:
 ## Add private key to .env for Node
 
 `PRIVATE_KEY=0x.....`
+
+## Add your contract address
+
+in index.ts:
+
+`const COUNTER_CONTRACT = "0xYOUR_CONTRACT_ADDRESS";`
 
 ## Run the sample
 
