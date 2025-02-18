@@ -1,4 +1,4 @@
-# SWTRPRoxy with Foundry
+# Counter with Foundry
 
 ## Install
 
