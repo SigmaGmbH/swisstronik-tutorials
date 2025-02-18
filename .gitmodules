@@ -1,0 +1,6 @@
+[submodule "viem_fountry_sample/lib/forge-std"]
+	path = viem_fountry_sample/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "Contract_deployment_foundry/lib/forge-std"]
+	path = Contract_deployment_foundry/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
