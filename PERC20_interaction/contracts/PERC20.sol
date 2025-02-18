@@ -83,6 +83,13 @@ contract PERC20 is Context, IPERC20Metadata {
     }
 
     /**
+     * @dev Returns if contract requires signed eth_call's
+     */
+    function requiresSignedCalls() external pure returns (bool) {
+        return true;
+    }
+
+    /**
      * @dev See {IPERC20-totalSupply}.
      */
     function totalSupply() public view virtual override returns (uint256) {

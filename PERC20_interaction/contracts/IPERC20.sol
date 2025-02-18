@@ -24,6 +24,11 @@ interface IPERC20 {
     // event Approval(address indexed owner, address indexed spender, uint256 value);
 
     /**
+     * @dev Returns if contract requires signed eth_call's
+     */
+    function requiresSignedCalls() external view returns (bool);
+
+    /**
      * @dev Returns the amount of tokens in existence.
      */
     function totalSupply() external view returns (uint256);
