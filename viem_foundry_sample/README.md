@@ -1,5 +1,9 @@
 # Swisstronik Viem Client Example Usage
 
+## Clone forge
+
+`git submodule update --init --recursive`
+
 ## Install
 
 `forge soldeer update`
