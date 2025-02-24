@@ -15,4 +15,6 @@
 ## Deploy & Verify
 
 To deploy and verify it on the explorer run:
-`forge create src/Counter.sol:Counter --account dev --broadcast --rpc-url https://json-rpc.testnet.swisstronik.com  --verifier custom --verifier-api-key ANY --verifier-url https://explorer-evm.testnet.swisstronik.com/api --verify --evm-version shanghai`
+
+
+`forge create src/Counter.sol:Counter --account dev --broadcast --rpc-url https://json-rpc.testnet.swisstronik.com  --verifier custom --verifier-api-key ANY --verifier-url https://explorer-evm.testnet.swisstronik.com/api --verify`
