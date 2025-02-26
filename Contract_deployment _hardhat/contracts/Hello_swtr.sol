@@ -4,13 +4,15 @@ import {ISWTRProxy} from "@swisstronik/sdi-contracts/contracts/interfaces/ISWTRP
 
 //This contract is only intended for testing purposes
 
-contract Swisstronik {
+interface Solution {
+    function getLatestIssuers() external view returns (address[] memory);
+}
+
+contract Swisstronik is Solution {
     string private message;
-
-
     ISWTRProxy public swtrProxy;
 
-    function getLatestIssuers() public returns (address[]) {
+    function getLatestIssuers() external view returns (address[] memory) {
         uint256 count = swtrProxy.issuerRecordCount();
 
         //TODO: rest of the function
