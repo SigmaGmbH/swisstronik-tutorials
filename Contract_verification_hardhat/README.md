@@ -11,7 +11,7 @@
 
 ## Deployment + Verification
 
-You can verify the contract programatically
+You can verify the contract programmatically
 - Run `npx hardhat run scripts/deploy/deploy_verify.js --network swisstronik`
 
 ## Verification using the Hardhat CLI
