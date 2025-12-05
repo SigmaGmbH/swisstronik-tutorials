@@ -12,7 +12,7 @@ The contract itself can be found here: [SampleCrossChainCounter.sol](/hyperlane_
 
 ## Socials
 
-- Discord: https://link.swisstronik.com/a46c36
+- Discord: https://discord.gg/swisstronik-1131133319149518858
 - Twitter: https://twitter.com/swisstronik
 
 ## Build
